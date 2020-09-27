@@ -1,0 +1,8 @@
+<li id="book-<%= book.id %>">
+  <%= link_to gravatar_for(book.user, size: 50), book.user %>
+  <span class="name"><%= link_to book.name, "#" %></span>
+  <span class="thoughts"><%= book.thoughts %></span><br>
+  <span class="timestamp">
+    <%= time_ago_in_words(book.created_at) %>前に投稿
+  </span>
+</li>

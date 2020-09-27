@@ -122,6 +122,7 @@ RSpec.describe "Users", type: :system do
     context "ページレイアウト" do
       before do
         login_for_system(user)
+        create_list(:book, 10, user: user)
         visit user_path(user)
       end
 
@@ -141,6 +142,22 @@ RSpec.describe "Users", type: :system do
 
       it "プロフィール編集ページへのリンクが表示されていることを確認" do
         expect(page).to have_link 'プロフィール編集', href: edit_user_path(user)
+      end
+
+      it "本の件数が表示されていることを確認" do
+        expect(page).to have_content "本 (#{user.books.count})"
+      end
+
+      it "本の情報が表示されていることを確認" do
+        Book.take(5).each do |book|
+          expect(page).to have_link book.name
+          expect(page).to have_content book.thoughts
+          expect(page).to have_content book.user.name
+        end
+      end
+
+      it "本のページネーションが表示されていることを確認" do
+        expect(page).to have_css "div.pagination"
       end
     end
   end
