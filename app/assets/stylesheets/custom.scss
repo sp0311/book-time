@@ -237,3 +237,9 @@ h2.book-name {
 .edit-book .delete-book {
   font-size: 15px;
 }
+
+.book-picture img {
+  max-width: 100%;
+  height: auto;
+  box-sizing: border-box;
+}
