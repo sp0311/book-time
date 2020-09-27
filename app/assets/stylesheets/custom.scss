@@ -113,11 +113,12 @@ input {
     margin-left: 20px;
     font-weight: normal;
   }
- }
-  #session_remember_me {
+}
+
+#session_remember_me {
   width: auto;
   margin-left: 0;
- }
+}
 
 //// プロフィールページ ////
 .title-profile {
@@ -153,16 +154,16 @@ input {
     padding: 10px 0;
     border-bottom: 1px solid $gray-lighter;
   }
- }
+}
 
- /* Book */
+/* Book */
 .books {
   list-style: none;
   padding: 0;
   li {
     padding: 10px 0;
     border-top: 1px solid #e8e8e8;
- }
+  }
   .user {
     margin-top: 5em;
     padding-top: 0;
@@ -199,4 +200,20 @@ span.picture {
   input {
     border: 0;
   }
+}
+
+//// トップページ（ログイン後） ////
+// 「新しい本を登録」ボタン
+.btn-record {
+  margin-top: 3em;
+}
+
+//// 本登録ページ ////
+.input-need {
+  color: red;
+  font-size: 13px;
+}
+
+.input-unneed {
+  font-size: 13px;
 }

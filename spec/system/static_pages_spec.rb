@@ -18,6 +18,10 @@ RSpec.describe "StaticPages", type: :system do
       context "本フィード", js: true do
         let!(:user) { create(:user) }
         let!(:book) { create(:book, user: user) }
+        
+        before do
+          login_for_system(user)
+        end
     
         it "本のぺージネーションが表示されること" do
           login_for_system(user)
@@ -28,6 +32,11 @@ RSpec.describe "StaticPages", type: :system do
           Book.take(5).each do |d|
             expect(page).to have_link d.name
           end
+        end
+
+        it "「新しい本を登録」リンクが表示されること" do
+          visit root_path
+          expect(page).to have_link "新しい本を登録", href: new_book_path
         end
       end
     end
