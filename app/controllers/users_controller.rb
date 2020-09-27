@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_action :logged_in_user, only: [:index, :show, :edit, :update]
+  before_action :correct_user,   only: [:edit, :update]
+  
   def index
   end
 
@@ -44,5 +47,14 @@ class UsersController < ApplicationController
 
   def user_params_update
     params.require(:user).permit(:name, :email, :introduction, :sex)
+  end
+
+  # 正しいユーザーかどうか確認
+  def correct_user
+    @user = User.find(params[:id])
+    if !current_user?(@user)
+      flash[:danger] = "このページへはアクセスできません"
+      redirect_to(root_url)
+    end
   end
 end
