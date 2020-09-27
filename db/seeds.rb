@@ -16,6 +16,6 @@ end
 
 10.times do |n|
   Book.create!(name: "座右の銘",
-               thoughts: "いろんな人の考え方が載っていて、とても勉強になりました",
+               thoughts: "いろいろな人の考えが載っていて、とても勉強になりました",
                user_id: 1)
 end
