@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Book es", type: :system do
   let!(:user) { create(:user) }
-  let!(:book) { create(:book, user: user) }
+  let!(:book) { create(:book, :picture, user: user) }
 
   describe "本の登録ページ" do
     before do
@@ -29,8 +29,15 @@ RSpec.describe "Book es", type: :system do
       it "有効な情報で本の登録を行うと本の登録成功のフラッシュが表示されること" do
         fill_in "本のタイトル/著者名", with: "座右の銘"
         fill_in "感想", with: "いろいろな人の考えが載っていて、とても勉強になりました"
+        attach_file "book[picture]", "#{Rails.root}/spec/fixtures/test_book.jpg"
         click_button "登録する"
         expect(page).to have_content "本が登録されました！"
+      end
+
+      it "画像無しで登録すると、デフォルト画像が割り当てられること" do
+        fill_in "本のタイトル/著者名", with: "座右の銘"
+        click_button "登録する"
+        expect(page).to have_link(href: book_path(Book.first))
       end
 
       it "無効な情報で本登録を行うと本登録失敗のフラッシュが表示されること" do
@@ -64,7 +71,9 @@ RSpec.describe "Book es", type: :system do
       it "有効な更新" do
         fill_in "本のタイトル/著者名", with: "編集：座右の銘"
         fill_in "感想", with: "編集：いろいろな人の考えが載っていて、とても勉強になりました"
+        attach_file "book[picture]", "#{Rails.root}/spec/fixtures/test_book2.jpg"
         click_button "更新する"
+        expect(book.reload.picture.url).to include "test_book2.jpg"
         expect(page).to have_content "本の情報が更新されました！"
         expect(book.reload.name).to eq "編集：座右の銘"
         expect(book.reload.thoughts).to eq "編集：いろいろな人の考えが載っていて、とても勉強になりました"
@@ -101,6 +110,7 @@ RSpec.describe "Book es", type: :system do
       it "本情報が表示されること" do
         expect(page).to have_content book.name
         expect(page).to have_content book.thoughts
+        expect(page).to have_link nil, href: book_path(book), class: 'book-picture'
       end
     end
 

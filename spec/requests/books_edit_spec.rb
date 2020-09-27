@@ -2,8 +2,10 @@ require "rails_helper"
 
 RSpec.describe "本の編集", type: :request do
   let!(:user) { create(:user) }
-  let!(:book) { create(:book, user: user) }
   let!(:other_user) { create(:user) }
+  let!(:book) { create(:book, user: user) }
+  let(:picture2_path) { File.join(Rails.root, 'spec/fixtures/test_book2.jpg') }
+  let(:picture2) { Rack::Test::UploadedFile.new(picture2_path) }
 
   context "認可されたユーザーの場合" do
     it "レスポンスが正常に表示されること(+フレンドリーフォワーディング)" do
@@ -11,7 +13,8 @@ RSpec.describe "本の編集", type: :request do
       login_for_request(user)
       expect(response).to redirect_to edit_book_url(book)
       patch book_path(book), params: { book: { name: "座右の銘",
-                                               thoughts: "いろいろな人の考えが載っていて、とても勉強になりました" } }
+                                               thoughts: "いろいろな人の考えが載っていて、とても勉強になりました",
+                                               picture: picture2 } }
       redirect_to book
       follow_redirect!
       expect(response).to render_template('books/show')

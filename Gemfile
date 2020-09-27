@@ -28,7 +28,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.13'
 gem 'faker'
 # Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
+gem 'carrierwave', '1.2.2'
+gem 'mini_magick', '>= 4.9.4'
 gem 'jquery-rails', '4.3.1'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -71,5 +72,6 @@ gem 'devise'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :production do
+  gem 'fog', '1.42'
   gem 'rails_12factor'
 end

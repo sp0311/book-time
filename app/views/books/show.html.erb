@@ -1,6 +1,13 @@
 <% provide(:title, "#{@book.name}") %>
 <div class="container">
   <div class="row">
+    <div class="col-md-4">
+      <span class="picture">
+        <%= link_to((image_tag @book.picture.thumb400.url), book_path(@book.id), class: 'book-picture') if @book.picture.url.present? %>
+      </span>
+    </div>
+    <div class="col-md-8">
+      <h2 class="book-name"><%= @book.name %></h2>
     <h2 class="book-name"><%= @book.name %></h2>
     <div class="change-book">
       <% if current_user == @book.user %>

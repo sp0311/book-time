@@ -4,6 +4,12 @@
     <div class="col-md-6 col-md-offset-3">
       <%= form_for(@book) do |f| %>
         <%= render 'shared/error_messages', object: f.object %>
+        <span class="picture">
+          <%= f.label :picture %>　<span class="input-unneed"></span>
+          <%= f.file_field :picture, accept: 'image/jpeg,image/png', class: 'form-control', id: 'book-picture' %>
+          <%= image_tag(@book.picture.thumb400.url) if @book.picture.url.present? %>
+        </span>
+        <p />
         <div class = 'form-group'>
           <%= f.label :name %>　<span class="input-need"></span>
           <%= f.text_field :name, class: 'form-control', id: 'book_name' %>
