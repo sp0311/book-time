@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Book es", type: :system do
   let!(:user) { create(:user) }
+  let!(:book) { create(:book, user: user) }
 
   describe "本の登録ページ" do
     before do
@@ -37,6 +38,24 @@ RSpec.describe "Book es", type: :system do
         fill_in "感想", with: "いろいろな人の考えが載っていて、とても勉強になります"
         click_button "登録する"
         expect(page).to have_content "本のタイトル/著者名を入力してください"
+      end
+    end
+  end
+
+  describe "本の詳細ページ" do
+    context "ページレイアウト" do
+      before do
+        login_for_system(user)
+        visit book_path(book)
+      end
+
+      it "正しいタイトルが表示されること" do
+        expect(page).to have_title full_title("#{book.name}")
+      end
+
+      it "本情報が表示されること" do
+        expect(page).to have_content book.name
+        expect(page).to have_content book.thoughts
       end
     end
   end
