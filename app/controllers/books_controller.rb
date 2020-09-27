@@ -5,7 +5,7 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
   end
-  
+
   def new
     @book = Book.new
   end
@@ -31,6 +31,18 @@ class BooksController < ApplicationController
       redirect_to @book
     else
       render 'edit'
+    end
+  end
+
+  def destroy
+    @book = Book.find(params[:id])
+    if current_user.admin? || current_user?(@book.user)
+      @book.destroy
+      flash[:success] = "本が削除されました"
+      redirect_to request.referrer == user_url(@book.user) ? user_url(@book.user) : root_url
+    else
+      flash[:danger] = "他人の本は削除できません"
+      redirect_to root_url
     end
   end
 

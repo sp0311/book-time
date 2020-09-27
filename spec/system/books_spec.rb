@@ -42,24 +42,6 @@ RSpec.describe "Book es", type: :system do
     end
   end
 
-  describe "本の詳細ページ" do
-    context "ページレイアウト" do
-      before do
-        login_for_system(user)
-        visit book_path(book)
-      end
-
-      it "正しいタイトルが表示されること" do
-        expect(page).to have_title full_title("#{book.name}")
-      end
-
-      it "本情報が表示されること" do
-        expect(page).to have_content book.name
-        expect(page).to have_content book.thoughts
-      end
-    end
-  end
-
   describe "本の編集ページ" do
     before do
       login_for_system(user)
@@ -88,12 +70,49 @@ RSpec.describe "Book es", type: :system do
         expect(book.reload.thoughts).to eq "編集：いろいろな人の考えが載っていて、とても勉強になりました"
       end
 
-
       it "無効な更新" do
         fill_in "本のタイトル/著者名", with: ""
         click_button "更新する"
         expect(page).to have_content '本のタイトル/著者名を入力してください'
         expect(book.reload.name).not_to eq ""
+      end
+    end
+
+    context "本の削除処理", js: true do
+      it "削除成功のフラッシュが表示されること" do
+        click_on '削除'
+        page.driver.browser.switch_to.alert.accept
+        expect(page).to have_content '本が削除されました'
+      end
+    end
+  end
+
+  describe "本の詳細ページ" do
+    context "ページレイアウト" do
+      before do
+        login_for_system(user)
+        visit book_path(book)
+      end
+
+      it "正しいタイトルが表示されること" do
+        expect(page).to have_title full_title("#{book.name}")
+      end
+
+      it "本情報が表示されること" do
+        expect(page).to have_content book.name
+        expect(page).to have_content book.thoughts
+      end
+    end
+
+    context "本の削除", js: true do
+      it "削除成功のフラッシュが表示されること" do
+        login_for_system(user)
+        visit book_path(book)
+        within find('.change-book') do
+          click_on '削除'
+        end
+        page.driver.browser.switch_to.alert.accept
+        expect(page).to have_content '本が削除されました'
       end
     end
   end

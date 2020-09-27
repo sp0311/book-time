@@ -13,6 +13,9 @@
           <%= f.text_field :thoughts, size: "60x4", class: 'form-control', id: 'book_thoughts' %>
         </div>
         <%= f.submit "更新する", class: "btn btn-primary" %>
+        <p></p>
+        <%= link_to "本を削除する", book_path(@book), method: :delete,
+                                    data: { confirm: "本当にこの本を削除してよろしいですか？" } %>
       <% end %>
     </div>
   </div>

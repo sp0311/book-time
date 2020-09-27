@@ -18,5 +18,3 @@ FactoryBot.define do
     created_at { 1.month.ago }
   end
 end
-
-
