@@ -49,16 +49,12 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:name, :thoughts)
+    params.require(:book).permit(:name, :thoughts, :picture)
   end
 
   def correct_user
     # 現在のユーザーが更新対象の本を保有しているかどうか確認
     @book = current_user.books.find_by(id: params[:id])
     redirect_to root_url if @book.nil?
-  end
-
-  def book_params
-    params.require(:book).permit(:name, :thoughts, :picture)
   end
 end
