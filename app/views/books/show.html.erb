@@ -1,0 +1,16 @@
+<% provide(:title, "#{@book.name}") %>
+<div class="container">
+  <div class="row">
+    <h2 class="book-name"><%= @book.name %></h2>
+    <div class="change-book">
+      <% if current_user == @book.user %>
+        <%= link_to "編集", edit_book_path(@book), class: 'edit-book' %>　
+      <% end %>
+      <% if current_user.admin? || (current_user == @book.user) %>
+        <%= link_to "削除", book_path(@book), method: :delete, class: 'delete-book',
+                                      data: { confirm: "本当に削除しますか？" } %>
+      <% end %>
+    </div>
+    <h4><%= @book.thoughts %></h4>
+  </div>
+</div>

@@ -17,4 +17,15 @@
       <% end %>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-9">
+      <% if @user.books.any? %>
+        <h3>本 (<%= @user.books.count %>)</h3>
+        <ol class="books">
+          <%= render @books %>
+        </ol>
+        <%= will_paginate @books %>
+      <% end %>
+    </div>
+  </div>
 </div>

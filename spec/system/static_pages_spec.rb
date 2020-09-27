@@ -14,6 +14,38 @@ RSpec.describe "StaticPages", type: :system do
       it "正しいタイトルが表示されることを確認" do
         expect(page).to have_title full_title
       end
+
+      context "本フィード", js: true do
+        let!(:user) { create(:user) }
+        let!(:book) { create(:book, user: user) }
+
+        before do
+          login_for_system(user)
+        end
+
+        it "本のぺージネーションが表示されること" do
+          login_for_system(user)
+          create_list(:book, 6, user: user)
+          visit root_path
+          expect(page).to have_content "みんなの本 (#{user.books.count})"
+          expect(page).to have_css "div.pagination"
+          Book.take(5).each do |d|
+            expect(page).to have_link d.name
+          end
+        end
+
+        it "「新しい本を登録」リンクが表示されること" do
+          visit root_path
+          expect(page).to have_link "新しい本を登録", href: new_book_path
+        end
+
+        it "本を削除後、削除成功のフラッシュが表示されること" do
+          visit root_path
+          click_on '削除'
+          page.driver.browser.switch_to.alert.accept
+          expect(page).to have_content '本が削除されました'
+        end
+      end
     end
   end
 
