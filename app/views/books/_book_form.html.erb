@@ -1,5 +1,9 @@
 <%= form_with model: @book, local: true do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
+    <span class="picture">
+    <%= f.label :picture %>　<span class="input-unneed"></span>
+    <%= f.file_field :picture, accept: 'image/jpeg,image/png', class: 'form-control', id: 'book_picture' %>
+  </span>
   <div class = 'form-group'>
     <%= f.label :name %>　<span class="input-need"></span>
     <%= f.text_field :name, class: 'form-control', id: 'book_name' %>
