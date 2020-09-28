@@ -161,31 +161,67 @@ RSpec.describe "Users", type: :system do
       it "本のページネーションが表示されていることを確認" do
         expect(page).to have_css "div.pagination"
       end
+    end
 
-      context "ユーザーのフォロー/アンフォロー処理", js: true do
-        it "ユーザーのフォロー/アンフォローができること" do
-          login_for_system(user)
-          visit user_path(other_user)
-          expect(page).to have_button 'フォローする'
-          click_button 'フォローする'
-          expect(page).to have_button 'フォロー中'
-          click_button 'フォロー中'
-          expect(page).to have_button 'フォローする'
-        end
+    context "ユーザーのフォロー/アンフォロー処理", js: true do
+      it "ユーザーのフォロー/アンフォローができること" do
+        login_for_system(user)
+        visit user_path(other_user)
+        expect(page).to have_button 'フォローする'
+        click_button 'フォローする'
+        expect(page).to have_button 'フォロー中'
+        click_button 'フォロー中'
+        expect(page).to have_button 'フォローする'
+      end
+    end
+
+    context "お気に入り登録/解除" do
+      before do
+        login_for_system(user)
       end
 
-      context "お気に入り登録/解除" do
-        before do
-          login_for_system(user)
-        end
-  
-        it "本のお気に入り登録/解除ができること" do
-          expect(user.favorite?(book)).to be_falsey
-          user.favorite(book)
-          expect(user.favorite?(book)).to be_truthy
-          user.unfavorite(book)
-          expect(user.favorite?(book)).to be_falsey
-        end
+      it "本のお気に入り登録/解除ができること" do
+        expect(user.favorite?(book)).to be_falsey
+        user.favorite(book)
+        expect(user.favorite?(book)).to be_truthy
+        user.unfavorite(book)
+        expect(user.favorite?(book)).to be_falsey
+      end
+
+      it "トップページからお気に入り登録/解除ができること", js: true do
+        visit root_path
+        link = find('.like')
+        expect(link[:href]).to include "/favorites/#{book.id}/create"
+        link.click
+        link = find('.unlike')
+        expect(link[:href]).to include "/favorites/#{book.id}/destroy"
+        link.click
+        link = find('.like')
+        expect(link[:href]).to include "/favorites/#{book.id}/create"
+      end
+
+      it "ユーザー個別ページからお気に入り登録/解除ができること", js: true do
+        visit user_path(user)
+        link = find('.like')
+        expect(link[:href]).to include "/favorites/#{book.id}/create"
+        link.click
+        link = find('.unlike')
+        expect(link[:href]).to include "/favorites/#{book.id}/destroy"
+        link.click
+        link = find('.like')
+        expect(link[:href]).to include "/favorites/#{book.id}/create"
+      end
+
+      it "本の個別ページからお気に入り登録/解除ができること", js: true do
+        visit book_path(book)
+        link = find('.like')
+        expect(link[:href]).to include "/favorites/#{book.id}/create"
+        link.click
+        link = find('.unlike')
+        expect(link[:href]).to include "/favorites/#{book.id}/destroy"
+        link.click
+        link = find('.like')
+        expect(link[:href]).to include "/favorites/#{book.id}/create"
       end
     end
   end
