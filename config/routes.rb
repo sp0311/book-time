@@ -12,4 +12,5 @@ Rails.application.routes.draw do
     end
   end
   resources :books
+  resources :relationships, only: [:create, :destroy]
 end
