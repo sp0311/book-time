@@ -5,6 +5,7 @@ RSpec.describe "Users", type: :system do
   let!(:admin_user) { create(:user, :admin) }
   let!(:other_user) { create(:user) }
   let!(:book) { create(:book, user: user) }
+  let!(:other_book) { create(:book, user: other_user) }
 
   describe "ユーザー一覧ページ" do
     context "管理者ユーザーの場合" do
@@ -154,7 +155,6 @@ RSpec.describe "Users", type: :system do
         Book.take(5).each do |book|
           expect(page).to have_link book.name
           expect(page).to have_content book.thoughts
-          expect(page).to have_content book.user.name
         end
       end
 
@@ -222,6 +222,27 @@ RSpec.describe "Users", type: :system do
         link.click
         link = find('.like')
         expect(link[:href]).to include "/favorites/#{book.id}/create"
+      end
+
+      it "お気に入り一覧ページが期待通り表示されること" do
+        visit favorites_path
+        expect(page).not_to have_css ".favorite-book"
+        user.favorite(book)
+        user.favorite(other_book)
+        visit favorites_path
+        expect(page).to have_css ".favorite-book", count: 2
+        expect(page).to have_content book.name
+        expect(page).to have_content book.thoughts
+        expect(page).to have_content "read by #{user.name}"
+        expect(page).to have_link user.name, href: user_path(user)
+        expect(page).to have_content other_book.name
+        expect(page).to have_content other_book.thoughts
+        expect(page).to have_content "read by #{other_user.name}"
+        expect(page).to have_link other_user.name, href: user_path(other_user)
+        user.unfavorite(other_book)
+        visit favorites_path
+        expect(page).to have_css ".favorite-book", count: 1
+        expect(page).to have_content book.name
       end
     end
   end
