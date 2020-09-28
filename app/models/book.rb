@@ -9,6 +9,10 @@ class Book < ApplicationRecord
   validates :thoughts, length: { maximum: 400 }
   validate  :picture_size
 
+  def feed_comment(book_id)
+    Comment.where("book_id = ?", book_id)
+  end
+
   private
 
   def picture_size

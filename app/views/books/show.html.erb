@@ -1,4 +1,5 @@
 <% provide(:title, "#{@book.name}") %>
+<% @comments  = @book.feed_comment(@book.id) %> 
 <div class="container">
   <div class="row">
     <div class="col-md-4">
@@ -21,6 +22,7 @@
       <h4><%= @book.thoughts %></h4>
       </div>
       <div class="comment">
+        <%= render "comments/feed_comments" %> 
         <%= render "comments/new" %>
       </div>
     </div>
