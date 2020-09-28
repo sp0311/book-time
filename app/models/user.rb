@@ -76,6 +76,19 @@ class User < ApplicationRecord
     followers.include?(other_user)
   end
 
+  def favorite(book)
+    Favorite.create!(user_id: id, book_id: book.id)
+  end
+
+  def unfavorite(book)
+    Favorite.find_by(user_id: id, book_id: book.id).destroy
+  end
+
+  # 現在のユーザーがお気に入り登録してたらtrueを返す
+  def favorite?(book)
+    !Favorite.find_by(user_id: id, book_id: book.id).nil?
+  end
+
   private
 
     def downcase_email
