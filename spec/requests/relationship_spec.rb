@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "ユーザーフォロー機能", type: :request do
   let(:user) { create(:user) }
-  let(:other_user) { create(:user) } 
+  let(:other_user) { create(:user) }
 
   context "ログインしている場合" do
     before do
@@ -37,7 +37,6 @@ RSpec.describe "ユーザーフォロー機能", type: :request do
       }.to change(user.following, :count).by(-1)
     end
   end
-
 
   context "ログインしていない場合" do
     it "followingページへ飛ぶとログインページへリダイレクトすること" do

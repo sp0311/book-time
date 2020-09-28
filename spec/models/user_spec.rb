@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:user) { create(:user) }
-  let!(:other_user) { create(:user) } 
+  let!(:other_user) { create(:user) }
 
   context "バリデーション" do
     it "名前、メールアドレスがあれば有効な状態であること" do
@@ -63,6 +63,7 @@ RSpec.describe User, type: :model do
       expect(user.authenticated?('')).to eq false
     end
   end
+
   context "フォロー機能" do
     it "フォローとアンフォローが正常に動作すること" do
       expect(user.following?(other_user)).to be_falsey
