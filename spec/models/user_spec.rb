@@ -71,6 +71,11 @@ RSpec.describe User, type: :model do
       user.unfollow(other_user)
       expect(user.following?(other_user)).to be_falsey
     end
+
+    it "フォローとアンフォローが正常に動作すること" do
+      expect(user.following?(other_user)).to be_truthy
+      expect(other_user.followed_by?(user)).to be_truthy
+    end
   end
 end
 
