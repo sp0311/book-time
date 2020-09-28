@@ -4,6 +4,8 @@ RSpec.describe "Users", type: :system do
   let!(:user) { create(:user) }
   let!(:admin_user) { create(:user, :admin) }
   let!(:other_user) { create(:user) }
+  let!(:book) { create(:book, user: user) }
+  let!(:other_book) { create(:book, user: other_user) }
 
   describe "ユーザー一覧ページ" do
     context "管理者ユーザーの場合" do
@@ -153,24 +155,94 @@ RSpec.describe "Users", type: :system do
         Book.take(5).each do |book|
           expect(page).to have_link book.name
           expect(page).to have_content book.thoughts
-          expect(page).to have_content book.user.name
         end
       end
 
       it "本のページネーションが表示されていることを確認" do
         expect(page).to have_css "div.pagination"
       end
+    end
 
-      context "ユーザーのフォロー/アンフォロー処理", js: true do
-        it "ユーザーのフォロー/アンフォローができること" do
-          login_for_system(user)
-          visit user_path(other_user)
-          expect(page).to have_button 'フォローする'
-          click_button 'フォローする'
-          expect(page).to have_button 'フォロー中'
-          click_button 'フォロー中'
-          expect(page).to have_button 'フォローする'
-        end
+    context "ユーザーのフォロー/アンフォロー処理", js: true do
+      it "ユーザーのフォロー/アンフォローができること" do
+        login_for_system(user)
+        visit user_path(other_user)
+        expect(page).to have_button 'フォローする'
+        click_button 'フォローする'
+        expect(page).to have_button 'フォロー中'
+        click_button 'フォロー中'
+        expect(page).to have_button 'フォローする'
+      end
+    end
+
+    context "お気に入り登録/解除" do
+      before do
+        login_for_system(user)
+      end
+
+      it "本のお気に入り登録/解除ができること" do
+        expect(user.favorite?(book)).to be_falsey
+        user.favorite(book)
+        expect(user.favorite?(book)).to be_truthy
+        user.unfavorite(book)
+        expect(user.favorite?(book)).to be_falsey
+      end
+
+      it "トップページからお気に入り登録/解除ができること", js: true do
+        visit root_path
+        link = find('.like')
+        expect(link[:href]).to include "/favorites/#{book.id}/create"
+        link.click
+        link = find('.unlike')
+        expect(link[:href]).to include "/favorites/#{book.id}/destroy"
+        link.click
+        link = find('.like')
+        expect(link[:href]).to include "/favorites/#{book.id}/create"
+      end
+
+      it "ユーザー個別ページからお気に入り登録/解除ができること", js: true do
+        visit user_path(user)
+        link = find('.like')
+        expect(link[:href]).to include "/favorites/#{book.id}/create"
+        link.click
+        link = find('.unlike')
+        expect(link[:href]).to include "/favorites/#{book.id}/destroy"
+        link.click
+        link = find('.like')
+        expect(link[:href]).to include "/favorites/#{book.id}/create"
+      end
+
+      it "本の個別ページからお気に入り登録/解除ができること", js: true do
+        visit book_path(book)
+        link = find('.like')
+        expect(link[:href]).to include "/favorites/#{book.id}/create"
+        link.click
+        link = find('.unlike')
+        expect(link[:href]).to include "/favorites/#{book.id}/destroy"
+        link.click
+        link = find('.like')
+        expect(link[:href]).to include "/favorites/#{book.id}/create"
+      end
+
+      it "お気に入り一覧ページが期待通り表示されること" do
+        visit favorites_path
+        expect(page).not_to have_css ".favorite-book"
+        user.favorite(book)
+        user.favorite(other_book)
+        visit favorites_path
+        expect(page).to have_css ".favorite-book", count: 2
+        expect(page).to have_content book.name
+        expect(page).to have_content book.thoughts
+        expect(page).to have_content "read by #{user.name}"
+        expect(page).to have_link user.name, href: user_path(user)
+        expect(page).to have_content other_book.name
+        expect(page).to have_content other_book.thoughts
+        expect(page).to have_content "read by #{other_user.name}"
+        expect(page).to have_link other_user.name, href: user_path(other_user)
+        user.unfavorite(other_book)
+        visit favorites_path
+        expect(page).to have_css ".favorite-book", count: 1
+        expect(page).to have_content book.name
       end
     end
   end
