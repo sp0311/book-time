@@ -1,6 +1,6 @@
 <% if logged_in? %>
-  <div class="container">
-    <div class="row">
+  <div id="fh5co-portfolio">
+    <div class="container">
       <div class="col-md-9">
         <h3>みんなの本 (<%= @feed_items.count %>)</h3>
         <%= render 'shared/feed' %>
@@ -11,7 +11,22 @@
     </div>
   </div>
 <% else %>
-  <center>
-    <h1>BOOK TIMEへようこそ！</h1>
-  </center>
+  <header id="fh5co-header" class="fh5co-cover js-fullheight" role="banner">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 text-center">
+          <div class="display-t js-fullheight">
+            <div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
+              <h1>読んだ本に<br>写真をつけて保存。</h1>
+              <h2>感想・アウトプット・読んで行動した成果など自由に記録しましょう。</h2>
+              <p>
+                <%= link_to 'BOOK TIME START', signup_path, class: "btn btn-primary btn-lg btn-demo" %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 <% end %>
