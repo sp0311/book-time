@@ -289,3 +289,7 @@ a.like, a.unlike {
     border-top: 1px solid #e8e8e8;
   }
 }
+
+li.new_notification > a > span {
+  color: red;
+}
