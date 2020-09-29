@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   post   "favorites/:book_id/create"  => "favorites#create"
   delete "favorites/:book_id/destroy" => "favorites#destroy"
   resources :comments, only: [:create, :destroy]
+  resources :notifications, only: :index
 end
