@@ -246,7 +246,6 @@ RSpec.describe "Users", type: :system do
       end
     end
 
-
     context "通知生成" do
       before do
         login_for_system(user)

@@ -10,7 +10,7 @@ class FavoritesController < ApplicationController
     @user = @book.user
     current_user.favorite(@book)
     respond_to do |format|
-      format.html { redirect_to request.referrer || root_url } 
+      format.html { redirect_to request.referrer || root_url }
       format.js
     end
     # 自分以外のユーザーからお気に入り登録があったときのみ通知を作成
