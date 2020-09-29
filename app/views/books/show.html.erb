@@ -1,29 +1,31 @@
 <% provide(:title, "#{@book.name}") %>
-<% @comments  = @book.feed_comment(@book.id) %> 
-<div class="container">
-  <div class="row">
-    <div class="col-md-4">
-      <span class="picture">
-        <%= link_to((image_tag @book.picture.thumb400.url), book_path(@book.id), class: 'book-picture') if @book.picture.url.present? %>
-      </span>
-      <%= render 'users/favorite_form' %>
-    </div>
-    <div class="col-md-8">
-      <h2 class="book-name"><%= @book.name %></h2>
-      <div class="change-book">
-        <% if current_user == @book.user %>
-          <%= link_to "編集", edit_book_path(@book), class: 'edit-book' %>　
-        <% end %>
-        <% if current_user.admin? || (current_user == @book.user) %>
-          <%= link_to "削除", book_path(@book), method: :delete, class: 'delete-book',
-                                        data: { confirm: "本当に削除しますか？" } %>
-        <% end %>
+<% @comments  = @book.feed_comment(@book.id) %>
+<div id="fh5co-portfolio">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <span class="picture">
+          <%= link_to((image_tag @book.picture.thumb400.url), book_path(@book.id), class: 'book-picture') if @book.picture.url.present? %>
+        </span>
+        <%= render 'users/favorite_form' %>
       </div>
-      <h4><%= @book.thoughts %></h4>
-      </div>
-      <div class="comment">
-        <%= render "comments/feed_comments" %> 
-        <%= render "comments/new" %>
+      <div class="col-md-8">
+        <h2 class="book-name"><%= @book.name %></h2>
+        <div class="change-book">
+          <% if current_user == @book.user %>
+            <%= link_to "編集", edit_book_path(@book), class: 'edit-book' %>　
+          <% end %>
+          <% if current_user.admin? || (current_user == @book.user) %>
+            <%= link_to "削除", book_path(@book), method: :delete, class: 'delete-book',
+                                          data: { confirm: "本当に削除しますか？" } %>
+          <% end %>
+        </div>
+        <h4><%= simple_format(@book.thoughts) %></h4>
+       </div>
+        <div class="comment">
+          <%= render "comments/feed_comments" %> 
+          <%= render "comments/new" %>
+        </div>
       </div>
     </div>
   </div>

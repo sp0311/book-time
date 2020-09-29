@@ -233,11 +233,11 @@ RSpec.describe "Users", type: :system do
         expect(page).to have_css ".favorite-book", count: 2
         expect(page).to have_content book.name
         expect(page).to have_content book.thoughts
-        expect(page).to have_content "read by #{user.name}"
+        expect(page).to have_content "reader #{user.name}"
         expect(page).to have_link user.name, href: user_path(user)
         expect(page).to have_content other_book.name
         expect(page).to have_content other_book.thoughts
-        expect(page).to have_content "read by #{other_user.name}"
+        expect(page).to have_content "reader #{other_user.name}"
         expect(page).to have_link other_user.name, href: user_path(other_user)
         user.unfavorite(other_book)
         visit favorites_path

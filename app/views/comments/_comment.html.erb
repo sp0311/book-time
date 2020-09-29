@@ -5,7 +5,7 @@
       <span class="user"><%= link_to comment_user.name, comment_user %></span>
     </div>
     <div class="col-md-8">
-      <span class="comment"><%= comment.content %></span>
+      <span class="comment"><%= simple_format(comment.content) %></span>
     </div>
     <div class="col-md-2">
       <% if current_user.id == comment.user_id %>

@@ -9,7 +9,7 @@ RSpec.describe "静的ページ", type: :request do
     end
   end
 
-  describe "BOOK TIMEとは？ページ" do
+  describe "BOOK TIME？ページ" do
     it "正常なレスポンスを返すこと" do
       get about_path
       expect(response).to be_success

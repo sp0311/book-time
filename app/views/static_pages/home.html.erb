@@ -1,17 +1,30 @@
 <% if logged_in? %>
-  <div class="container">
-    <div class="row">
+  <div id="fh5co-portfolio">
+    <div class="container">
       <div class="col-md-9">
-        <h3>みんなの本 (<%= @feed_items.count %>)</h3>
         <%= render 'shared/feed' %>
       </div>
       <div class="col-md-3">
-        <p><%= link_to "新しい本を登録", new_book_path, class: "btn btn-primary btn-lg btn-record" %></p>
+        <p><%= link_to "本を登録する", new_book_path, class: "btn btn-primary btn-lg btn-demo btn-record" %></p>
       </div>
     </div>
   </div>
 <% else %>
-  <center>
-    <h1>BOOK TIMEへようこそ！</h1>
-  </center>
+  <header id="fh5co-header" class="fh5co-cover js-fullheight" role="banner">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 text-center">
+          <div class="display-t js-fullheight">
+            <div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
+              <h2>読書をしたら、<br>忘れたくないことや思いを残しましょう。</h2>
+              <p>
+                <%= link_to 'BOOK TIME START', signup_path, class: "btn btn-primary btn-lg btn-demo" %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 <% end %>

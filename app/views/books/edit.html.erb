@@ -1,28 +1,31 @@
 <% provide(:title, "本の情報編集") %>
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <%= form_for(@book) do |f| %>
-        <%= render 'shared/error_messages', object: f.object %>
-        <span class="picture">
-          <%= f.label :picture %>　<span class="input-unneed"></span>
-          <%= f.file_field :picture, accept: 'image/jpeg,image/png', class: 'form-control', id: 'book-picture' %>
-          <%= image_tag(@book.picture.thumb400.url) if @book.picture.url.present? %>
-        </span>
-        <p />
-        <div class = 'form-group'>
-          <%= f.label :name %>　<span class="input-need"></span>
-          <%= f.text_field :name, class: 'form-control', id: 'book_name' %>
-        </div>
-        <div class = 'form-group'>
-          <%= f.label :thoughts %>　<span class="input-unneed"></span>
-          <%= f.text_field :thoughts, size: "60x4", class: 'form-control', id: 'book_thoughts' %>
-        </div>
-        <%= f.submit "更新する", class: "btn btn-primary" %>
-        <p></p>
-        <%= link_to "本を削除する", book_path(@book), method: :delete,
-                                    data: { confirm: "本当にこの本を削除してよろしいですか？" } %>
-      <% end %>
+<div id="fh5co-portfolio">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <%= form_for(@book) do |f| %>
+          <%= render 'shared/error_messages', object: f.object %>
+          <span class="picture">
+              <%= f.label :picture %>　<span class="input-unneed"></span>
+              <%= f.file_field :picture, accept: 'image/jpeg,image/png', class: 'form-control', id: 'book-picture' %>
+              <%= image_tag(@book.picture.thumb400.url) if @book.picture.url.present? %>
+              <p></p>
+          </span>
+          <p></p>
+          <div class = 'form-group'>
+            <%= f.label :name %>　<span class="input-need"></span>
+            <%= f.text_field :name, class: 'form-control', id: 'book_name' %>
+          </div>
+          <div class = 'form-group'>
+            <%= f.label :thoughts %>　<span class="input-unneed"></span>
+            <%= f.text_field :thoughts, size: "60x4", class: 'form-control', id: 'book_thoughts' %>
+          </div>
+          <%= f.submit "更新する", class: "btn btn-primary" %>
+          <p></p>
+          <%= link_to "本を削除する", book_path(@book), method: :delete,
+                                      data: { confirm: "本当にこの本を削除してよろしいですか？" } %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
