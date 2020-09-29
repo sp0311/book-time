@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Bookes", type: :system do
+RSpec.describe "Books", type: :system do
   let!(:user) { create(:user) }
   let!(:other_user) { create(:user) }
   let!(:book) { create(:book, :picture, user: user) }
@@ -151,6 +151,93 @@ RSpec.describe "Bookes", type: :system do
           expect(page).to have_selector 'span', text: user.name
           expect(page).to have_selector 'span', text: comment.content
           expect(page).not_to have_link '削除', href: book_path(book)
+        end
+      end
+    end
+  
+    context "検索機能" do
+      context "ログインしている場合" do
+        before do
+          login_for_system(user)
+          visit root_path
+        end
+  
+        it "ログイン後の各ページに検索窓が表示されていること" do
+          expect(page).to have_css 'form#book_search'
+          visit about_path
+          expect(page).to have_css 'form#book_search'
+          visit use_of_terms_path
+          expect(page).to have_css 'form#book_search'
+          visit users_path
+          expect(page).to have_css 'form#book_search'
+          visit user_path(user)
+          expect(page).to have_css 'form#book_search'
+          visit edit_user_path(user)
+          expect(page).to have_css 'form#book_search'
+          visit following_user_path(user)
+          expect(page).to have_css 'form#book_search'
+          visit followers_user_path(user)
+          expect(page).to have_css 'form#book_search'
+          visit books_path
+          expect(page).to have_css 'form#book_search'
+          visit book_path(book)
+          expect(page).to have_css 'form#book_search'
+          visit new_book_path
+          expect(page).to have_css 'form#book_search'
+          visit edit_book_path(book)
+          expect(page).to have_css 'form#book_search'
+        end
+  
+        it "フィードの中から検索ワードに該当する結果が表示されること" do
+          create(:book, name: 'ハリーポッターと賢者の石', user: user)
+          create(:book, name: 'ハリーポッターと秘密の部屋', user: other_user)
+          create(:book, name: '剣客商売三 陽炎の男', user: user)
+          create(:book, name: '剣客商売二 辻斬り', user: other_user)
+  
+          # 誰もフォローしない場合
+          fill_in 'q_name_cont', with: 'ハリー'
+          click_button '検索'
+          expect(page).to have_css 'h3', text: "ハリー”の検索結果：2件"
+          within find('.books') do
+            expect(page).to have_css 'li', count: 2
+          end
+          fill_in 'q_name_cont', with: '剣客'
+          click_button '検索'
+          expect(page).to have_css 'h3', text: "剣客”の検索結果：2件"
+          within find('.books') do
+            expect(page).to have_css 'li', count: 2
+          end
+  
+          # other_userをフォローする場合
+          user.follow(other_user)
+          fill_in 'q_name_cont', with: 'ハリー'
+          click_button '検索'
+          expect(page).to have_css 'h3', text: "ハリー”の検索結果：2件"
+          within find('.books') do
+            expect(page).to have_css 'li', count: 2
+          end
+          fill_in 'q_name_cont', with: '剣客'
+          click_button '検索'
+          expect(page).to have_css 'h3', text: "剣客”の検索結果：2件"
+          within find('.books') do
+            expect(page).to have_css 'li', count: 2
+          end
+        end
+  
+        it "検索ワードを入れずに検索ボタンを押した場合、本一覧が表示されること" do
+          fill_in 'q_name_cont', with: ''
+          click_button '検索'
+          expect(page).to have_css 'h3', text: "本一覧"
+          within find('.books') do
+            expect(page).to have_css 'li', count: Book.count
+          end
+        end
+      end
+  
+      context "ログインしていない場合" do
+        it "検索窓が表示されないこと" do
+          visit root_path
+          expect(page).not_to have_css 'form#book_search'
         end
       end
     end
