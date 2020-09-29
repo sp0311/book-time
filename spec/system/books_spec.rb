@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Book es", type: :system do
+RSpec.describe "Bookes", type: :system do
   let!(:user) { create(:user) }
   let!(:other_user) { create(:user) }
   let!(:book) { create(:book, :picture, user: user) }
