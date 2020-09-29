@@ -32,6 +32,22 @@ $main-gray: #cccccc;
   font-size: 0px;
 }
 
+// スマホ用：ヘッダーメニューが横棒三本のところを境にロゴを拡大
+@media screen and (max-width: 768px) {
+  #logo {
+    img {
+      max-width: 400%;
+      height: auto;
+      box-sizing: border-box;
+    }
+  }
+}
+
+// スマホ閲覧時に横棒三本をページ上部に固定
+.fh5co-nav-toggle {
+  position: fixed;
+}
+
 //// ページボディ部 ////
 #fh5co-portfolio {
   padding: 0;
@@ -367,33 +383,3 @@ a.list, a.unlist {
   margin-bottom: 20px;
 }
 
-.text_area {
-	-webkit-appearance: textarea;
-	background-color: white;
-	-webkit-rtl-ordering: logical;
-	user-select: text;
-	flex-direction: column;
-	resize: auto;
-	cursor: auto;
-	white-space: pre-wrap;
-	word-wrap: break-word;
-	border-width: 1px;
-	border-style: solid;
-	border-color: initial;
-	border-image: initial;
-	padding: 2px;
-
-	text-rendering: auto;
-	color: initial;
-	letter-spacing: normal;
-	word-spacing: normal;
-	text-transform: none;
-	text-indent: 0px;
-	text-shadow: none;
-	display: inline-block;
-	text-align: start;
-	margin: 0em 0em 0em 0em;
-	font: 11px system-ui;
-
-	-webkit-writing-mode: horizontal-tb;
-}
