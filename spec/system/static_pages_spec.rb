@@ -34,9 +34,9 @@ RSpec.describe "StaticPages", type: :system do
           end
         end
 
-        it "「新しい本を登録」リンクが表示されること" do
+        it "「本を登録する」リンクが表示されること" do
           visit root_path
-          expect(page).to have_link "新しい本を登録", href: new_book_path
+          expect(page).to have_link "本を登録する", href: new_book_path
         end
 
         it "本を削除後、削除成功のフラッシュが表示されること" do

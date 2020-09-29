@@ -70,6 +70,10 @@ input {
   margin-top: 20px;
 }
 
+.account-delete {
+  margin-top: 20px;
+}
+
 //// ユーザー一覧ページ ////
 .users {
   list-style: none;
@@ -128,7 +132,7 @@ span.picture {
 }
 
 //// トップページ（ログイン後） ////
-// 「新しい本を登録」ボタン
+// 「本を登録する」ボタン
 .btn-record {
   margin-top: 3em;
 }
@@ -243,6 +247,17 @@ li.new_notification > a > span {
 #fh5co-wireframe {
   padding-top: 7em;
   padding-bottom: 0;
+}
+
+#fh5co-portfolio {
+  padding: 0;
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  h3 {
+    text-align: left;
+  }
 }
 
 //// ヘッダー ////
