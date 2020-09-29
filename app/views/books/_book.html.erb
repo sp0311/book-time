@@ -1,18 +1,29 @@
 <% @book = book %> 
-
 <li id="book-<%= book.id %>">
-  <%= link_to gravatar_for(book.user, size: 50), book.user %>
-  <span class="name"><%= link_to book.name, book_path(book) %></span>
-  <span>
-    <%= link_to((image_tag book.picture.thumb200.url), book_path(book.id), class: 'book-picture') if book.picture.url.present? %>
-  </span>
-  <%= render 'users/favorite_form' %>
-  <span class="thoughts"><%= book.thoughts %></span><br>
-  <span class="timestamp">
-    <%= time_ago_in_words(book.created_at) %>前に投稿
-  </span>
-  <% if current_user.admin? || (current_user == book.user) %>
-    <%= link_to "削除", book_path(book), method: :delete,
-                       data: { confirm: "本当に削除しますか？" } %>
-  <% end %>
+  <div class="row">
+    <div class="col-md-4">
+      <span>
+        <%= link_to((image_tag book.picture.thumb200.url), book_path(book.id), class: 'book-picture') if book.picture.url.present? %>
+      </span>
+      <%= render 'users/favorite_form' %>
+    </div>
+    <div class="col-md-8 escape-float">
+      <h3 class="book-name"><%= link_to book.name, book_path(book) %></h3>
+      <div class="book-thoughts "><%= book.thoughts %></div>
+      <div class="book-user">read by <%= link_to book.user.name, user_path(book.user) %></div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="book-created-at">
+            <%= time_ago_in_words(book.created_at) %>前に投稿
+          </div>
+        </div>
+        <% if current_user.admin? || (current_user == book.user) %>
+          <div class="col-md-6">
+            <%= link_to "削除", book_path(book), method: :delete,
+                               data: { confirm: "本当に削除しますか？" } %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </li>

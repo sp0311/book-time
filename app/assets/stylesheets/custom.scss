@@ -194,6 +194,38 @@ h2.book-name {
   color: grey;
 }
 
+// 本の一覧
+.book-user {
+  text-align: right;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+h3.book-name {
+  font-size: 20px;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.book-description {
+  margin-top: 10px;
+}
+
+// お気に入り
+.cook-user {
+ margin-bottom: 20px;
+}
+
+// リスト
+.list-button {
+ margin-bottom: 20px;
+}
+
+// ログ
+.add-cooklog {
+ font-weight: bold;
+}
+
 // フォロー、フォロワー数表示部
 .stats {
   margin: 5px 0;
