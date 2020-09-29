@@ -10,7 +10,7 @@
   </div>
   <div class = 'form-group'>
     <%= f.label :thoughts %>　<span class="input-unneed"></span>
-    <%= f.text_field :thoughts, size: "60x4", class: 'form-control', id: 'book_thoughts' %>
+    <%= f.text_area :thoughts, :size=>"60x10", class: 'form-control', id: 'book_thoughts' %>
   </div>
   <%= f.submit nil, class: 'btn btn-primary' %>
 <% end %>

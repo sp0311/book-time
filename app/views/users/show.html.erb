@@ -13,7 +13,7 @@
           <div class="col-md-8">
             <h4 class="show-user-name"><%= @user.name %></h4>　<%= @user.sex %>
             <div class="show-user-introduction">
-              <%= @user.introduction %>
+              <%= simple_format(@user.introduction) %>
             </div>
             <section class="stats">
               <%= render 'shared/stats' %>

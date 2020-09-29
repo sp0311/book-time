@@ -15,10 +15,10 @@
               <% else %>
                 <li class="no_notification header-link">
               <% end %>
-              <%= link_to notifications_path do %><span class="fas fa-bell"></span> <span>通知</span><% end %>
+              <%= link_to notifications_path do %><span class="fas fa-bell"></span> <span></span><% end %>
               </li>
               <li class="header-link">
-                <%= link_to favorites_path do %><span class="fas fa-heart"></span> <span>お気に入り</span><% end %>
+                <%= link_to favorites_path do %><span class="fas fa-heart"></span> <span></span><% end %>
               </li>
               <li class="has-dropdown">
                 <%= link_to current_user do %>
@@ -27,13 +27,13 @@
                 <ul class="dropdown">
                   <li><%= link_to 'プロフィール', current_user %></li>
                   <li><%= link_to 'ユーザー一覧', users_path %></li>
-                  <li><%= link_to 'BOOK TIMEとは？', about_path %></li>
+                  <li><%= link_to 'BOOK TIME？', about_path %></li>
                   <li><%= link_to 'ログアウト', logout_path, method: :delete %></li>
                 </ul>
               </li>
             <% else %>
               <li class="header-link">
-                <%= link_to about_path do %><span class="fas fa-question-circle"></span> <span>BOOK TIMEとは？</span><% end %>
+                <%= link_to about_path do %><span class="fas fa-question-circle"></span> <span>BOOK TIME？</span><% end %>
               </li>
               <li class="header-link">
                 <%= link_to signup_path do %><span class="fas fa-user-plus"></span> <span>ユーザー登録</span><% end %>

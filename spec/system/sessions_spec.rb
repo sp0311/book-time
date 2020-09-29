@@ -53,7 +53,7 @@ RSpec.describe "Sessions", type: :system do
       end
 
       it "有効なユーザーでログインする前後でヘッダーが正しく表示されていることを確認" do
-        expect(page).to have_link 'BOOK TIMEとは？', href: about_path
+        expect(page).to have_link 'BOOK TIME？', href: about_path
         expect(page).to have_link 'ユーザー登録', href: signup_path
         expect(page).to have_link 'ログイン', href: login_path
         expect(page).not_to have_link 'ログアウト', href: logout_path
@@ -62,7 +62,7 @@ RSpec.describe "Sessions", type: :system do
         fill_in "user_password", with: user.password
         click_button "ログイン"
 
-        expect(page).to have_link 'BOOK TIMEとは？', href: about_path
+        expect(page).to have_link 'BOOK TIME？', href: about_path
         expect(page).to have_link 'ユーザー一覧', href: users_path
         expect(page).to have_link 'プロフィール', href: user_path(user)
         expect(page).to have_link 'ログアウト', href: logout_path

@@ -20,7 +20,7 @@
                                           data: { confirm: "本当に削除しますか？" } %>
           <% end %>
         </div>
-        <h4><%= @book.thoughts %></h4>
+        <h4><%= simple_format(@book.thoughts) %></h4>
        </div>
         <div class="comment">
           <%= render "comments/feed_comments" %> 

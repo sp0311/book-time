@@ -2,11 +2,10 @@
   <div id="fh5co-portfolio">
     <div class="container">
       <div class="col-md-9">
-        <h3>みんなの本 (<%= @feed_items.count %>)</h3>
         <%= render 'shared/feed' %>
       </div>
       <div class="col-md-3">
-        <p><%= link_to "本を登録する", new_book_path, class: "btn btn-primary btn-lg btn-record" %></p>
+        <p><%= link_to "本を登録する", new_book_path, class: "btn btn-primary btn-lg btn-demo btn-record" %></p>
       </div>
     </div>
   </div>
@@ -18,8 +17,7 @@
         <div class="col-md-8 col-md-offset-2 text-center">
           <div class="display-t js-fullheight">
             <div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
-              <h1>読んだ本に<br>写真をつけて保存。</h1>
-              <h2>感想・アウトプット・読んで行動した成果など自由に記録しましょう。</h2>
+              <h2>読書をしたら、<br>忘れたくないことや思いを残しましょう。</h2>
               <p>
                 <%= link_to 'BOOK TIME START', signup_path, class: "btn btn-primary btn-lg btn-demo" %>
               </p>
