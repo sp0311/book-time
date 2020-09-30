@@ -72,9 +72,11 @@ gem 'devise'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'ransack'
 
+gem 'fog', '1.42'
+
 group :production do
   gem 'fog', '1.42'
   gem 'rails_12factor'
 end
 
-gem "aws-sdk-s3", require: false
+# gem "aws-sdk-s3", require: false
