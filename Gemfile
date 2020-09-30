@@ -76,3 +76,5 @@ group :production do
   gem 'fog', '1.42'
   gem 'rails_12factor'
 end
+
+gem "aws-sdk-s3", require: false
