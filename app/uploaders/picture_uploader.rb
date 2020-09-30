@@ -2,7 +2,8 @@ class PictureUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   if Rails.env.production?
-    storage :fog 
+    storage :fog
+    # amazon側へ保存する場合は、:fog
   else
     storage :file
   end
