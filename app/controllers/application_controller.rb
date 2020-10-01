@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
 
-  # フィードから検索条件に該当する料理を検索
+  # フィードから検索条件に該当する本を検索
   def set_search
     if logged_in?
       @search_word = params[:q][:name_cont] if params[:q]
