@@ -154,14 +154,14 @@ RSpec.describe "Books", type: :system do
         end
       end
     end
-  
+
     context "検索機能" do
       context "ログインしている場合" do
         before do
           login_for_system(user)
           visit root_path
         end
-  
+
         it "ログイン後の各ページに検索窓が表示されていること" do
           expect(page).to have_css 'form#book_search'
           visit about_path
@@ -187,13 +187,13 @@ RSpec.describe "Books", type: :system do
           visit edit_book_path(book)
           expect(page).to have_css 'form#book_search'
         end
-  
+
         it "フィードの中から検索ワードに該当する結果が表示されること" do
           create(:book, name: 'ハリーポッターと賢者の石', user: user)
           create(:book, name: 'ハリーポッターと秘密の部屋', user: other_user)
           create(:book, name: '剣客商売三 陽炎の男', user: user)
           create(:book, name: '剣客商売二 辻斬り', user: other_user)
-  
+
           # 誰もフォローしない場合
           fill_in 'q_name_cont', with: 'ハリー'
           click_button '検索'
@@ -207,7 +207,7 @@ RSpec.describe "Books", type: :system do
           within find('.books') do
             expect(page).to have_css 'li', count: 2
           end
-  
+
           # other_userをフォローする場合
           user.follow(other_user)
           fill_in 'q_name_cont', with: 'ハリー'
@@ -223,7 +223,7 @@ RSpec.describe "Books", type: :system do
             expect(page).to have_css 'li', count: 2
           end
         end
-  
+
         it "検索ワードを入れずに検索ボタンを押した場合、本一覧が表示されること" do
           fill_in 'q_name_cont', with: ''
           click_button '検索'
@@ -233,7 +233,7 @@ RSpec.describe "Books", type: :system do
           end
         end
       end
-  
+
       context "ログインしていない場合" do
         it "検索窓が表示されないこと" do
           visit root_path

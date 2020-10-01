@@ -1,6 +1,18 @@
 $main-magenta: #dd356e;
 $main-gray: #cccccc;
 
+//// BOOK TIME？ページ ////
+// BOOK TIME？
+.title-about {
+  background: linear-gradient(transparent 70%, pink 70%);
+}
+
+li.A { 
+  list-style-type:none;
+  margin-bottom: 15px;
+}
+
+
 // ミックスイン
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
