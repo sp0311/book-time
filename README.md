@@ -1,24 +1,38 @@
-# README
+# BOOK TIME
+本に関することを誰でも簡単に投稿し、共有できるサイトです。
+https://book-time32973.herokuapp.com/
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# アプリケーションの概要
+本を読んだらそこで終了するのはもったいないという思いから生まれました。
+・感想を書いて自分の思考を整理
+・本を読んでいる子どもの写真をのせて、読書アルバムを作る
+・読んだ内容をアウトプットするツールとして使う
+・ハンドメイドの本なら作った物の写真を載せる
+など投稿したり、他の人と本の話題で交流できるサービスです。
 
-Things you may want to cover:
+# ポイント
+・GitHubはissue作成し共同開発をシュミレーション
+・各機能にRspec・Rubocop導入
+・Ajaxによる非同期通信対応
+・Bootstrapでレスポンシブ対応
+・ユーザー登録にGravatorを設置
+・ログインしないと閲覧不可なページを実装
 
-* Ruby version
+# 機能
+・ログイン
+・ログイン保持
+・バリデーション
+・プロフィール
+・画像アップロード
+・文章投稿
+・ページネーション
+・検索
+・フォロー
+・お気に入り機能
+・コメント
+・通知
 
-* System dependencies
+# 環境
+Ruby on Rails
+MySQL
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
