@@ -15,14 +15,14 @@
               <% else %>
                 <li class="no_notification header-link">
               <% end %>
-              <%= link_to notifications_path do %><span class="fas fa-bell"></span> <span></span><% end %>
+              <%= link_to notifications_path do %><span class="fas fa-bell"></i></span> <span></span><% end %>
               </li>
               <li class="header-link">
                 <%= link_to favorites_path do %><span class="fas fa-heart"></span> <span></span><% end %>
               </li>
               <li class="has-dropdown">
                 <%= link_to current_user do %>
-                  <span class="fas fa-user-cog"></span>
+                  <span class="fas fa-book-reader"></span>
                 <% end %>
                 <ul class="dropdown">
                   <li><%= link_to 'プロフィール', current_user %></li>
@@ -33,10 +33,11 @@
               </li>
             <% else %>
               <li class="header-link">
-                <%= link_to about_path do %><span class="fas fa-question-circle"></span> <span>BOOK TIME？</span><% end %>
+
+                <%= link_to about_path do %><span class="far fa-question-circle"></i></span> <span></span><% end %>
               </li>
               <li class="header-link">
-                <%= link_to signup_path do %><span class="fas fa-user-plus"></span> <span>ユーザー登録</span><% end %>
+                <%= link_to signup_path do %><span class="far fa-smile"></i></span> <span></span><% end %>
               </li>
               <li class="header-link btn-cta">
                 <%= link_to login_path do %><span> ログイン</span><% end %>

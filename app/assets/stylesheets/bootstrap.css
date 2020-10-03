@@ -228,7 +228,7 @@ th {
   *:before,
   *:after {
     background: transparent !important;
-    color: #000 !important;
+    color: SlateGray !important;
     box-shadow: none !important;
     text-shadow: none !important;
   }
@@ -2869,7 +2869,7 @@ a.btn.disabled, fieldset[disabled] a.btn {
   background-color: transparent;
 }
 .btn-link[disabled]:hover, .btn-link[disabled]:focus, fieldset[disabled] .btn-link:hover, fieldset[disabled] .btn-link:focus {
-  color: #777777;
+  color:#EEEEEE;
   text-decoration: none;
 }
 

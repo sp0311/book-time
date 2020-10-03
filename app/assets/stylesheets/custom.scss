@@ -1,10 +1,10 @@
 $main-magenta: #dd356e;
-$main-gray: #cccccc;
+$main-gray:#191970;
 
 //// BOOK TIME？ページ ////
 // BOOK TIME？
 .title-about {
-  background: linear-gradient(transparent 70%, pink 70%);
+  background: linear-gradient(transparent 70%, #D2B48C 70%);
 }
 
 li.A { 
@@ -222,9 +222,10 @@ span.picture {
 // 「本を登録する」ボタン
 .btn-record {
   margin-top: 3em;
-  color: black;
+  color:white;
   background-color: $main-gray;
   border-color: $main-gray;
+  font-size: 14px;
 }
 
 //// 本登録ページ ////
@@ -246,7 +247,7 @@ h3.book-name {
 }
 
 // お気に入り
-.cook-user {
+.book-user {
   margin-bottom: 20px;
 }
 //// 本登録ページ ////
@@ -323,7 +324,7 @@ h2.book-name {
 
 // お気に入り
 .like-btn-unlike {
-  color: red;
+  color: #000080;
 }
 
 .like-btn-like {
@@ -359,39 +360,8 @@ a.like, a.unlike {
   font-size: 16px;
 }
 
-// 新しい通知があるときは赤文字にする
+// 新しい通知があるときは青文字にする
 li.new_notification > a > span {
-  color: red;
-}
-
-//// リスト ////
-.list-btn-unlist {
-  color: red;
-  margin: 10px 0;
-}
-
-.list-btn-list {
-  color: grey;
-  margin: 10px 0;
-}
-
-a.list, a.unlist {
-  text-decoration: none;
-}
-
-.lists {
-  list-style: none;
-  li {
-    padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
-  }
-}
-
-.list-message {
-  font-size: 16px;
-}
-
-.list-book-description {
-  margin-bottom: 20px;
+  color: #D2B48C;
 }
 

@@ -10,7 +10,7 @@
     <div class="col-md-8 escape-float">
       <h3 class="book-name"><%= link_to book.name, book_path(book) %></h3>
       <div class="book-thoughts "><%= simple_format(book.thoughts) %></div>
-      <div class="book-user">reader <%= link_to book.user.name, user_path(book.user) %></div>
+      <div class="book-user">reader  <%= link_to book.user.name, user_path(book.user) %></div>
       <div class="row">
         <div class="col-md-6">
           <div class="book-created-at">
