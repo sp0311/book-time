@@ -35,4 +35,3 @@ https://book-time32973.herokuapp.com/
 # 環境
 Ruby on Rails  
 MySQL  
-
